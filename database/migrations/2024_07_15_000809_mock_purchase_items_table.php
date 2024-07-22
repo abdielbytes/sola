@@ -13,11 +13,16 @@ return new class extends Migration {
         Schema::create('mock_purchase_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mock_purchase_id');
-            $table->foreign('product_id')->references('id')->on('mock_purchases')->cascadeOnDelete();
-            $table->foreign('product_variation_id')->references('id')->on('product_variations')->cascadeOnDelete();
+            $table->unsignedBigInteger('product_id'); // Define the foreign key column
+            $table->unsignedBigInteger('product_variation_id'); // Define the foreign key column
             $table->integer('quantity');
             $table->decimal('price', 8, 2)->default(0);
             $table->timestamps();
+
+            // Add foreign key constraints
+            $table->foreign('mock_purchase_id')->references('id')->on('mock_purchases')->cascadeOnDelete();
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
+            $table->foreign('product_variation_id')->references('id')->on('product_variations')->cascadeOnDelete();
         });
     }
 

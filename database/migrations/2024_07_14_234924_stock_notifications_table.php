@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('stock_notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('product_id'); // Define the foreign key column
+            $table->foreign('product_id')->references('id')->on('product_variations')->onDelete('cascade');
             $table->string('threshold')->nullable();
             $table->timestamps();
         });
