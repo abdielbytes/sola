@@ -28,6 +28,8 @@ Route::prefix('v1')->group(function () {
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 
+//    todo stock notifications
+// todo mock purchases
 //    auth
 
     Route::middleware('guest')->group(function () {
